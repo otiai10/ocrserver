@@ -1,0 +1,5 @@
+# to use this config,
+# go run main.go -conf ./config/sample.toml
+appname = "ocrserver-default"
+version = "1.0"
+port = ":9900"
