@@ -3,3 +3,4 @@
 appname = "ocrserver-default"
 version = "1.0"
 port = ":9900"
+debug = true
