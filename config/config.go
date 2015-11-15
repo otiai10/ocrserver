@@ -13,7 +13,7 @@ type values struct {
 var v = values{
 	AppName: "ocrserver",
 	Version: "0.0.1-default",
-	Port:    ":8080",
+	Port:    ":9900",
 	Debug:   true,
 }
 
