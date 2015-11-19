@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -21,7 +20,8 @@ var (
 func FileUpload(w http.ResponseWriter, r *http.Request) {
 	// Get uploaded file
 	r.ParseMultipartForm(32 << 20)
-	upload, h, err := r.FormFile("file")
+	// upload, h, err := r.FormFile("file")
+	upload, _, err := r.FormFile("file")
 	if err != nil {
 		RenderError(w, http.StatusBadRequest, err)
 		return
@@ -29,11 +29,13 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 	defer upload.Close()
 
 	// Validate content type
-	contenttype := h.Header.Get("Content-Type")
-	if !imgexp.MatchString(contenttype) {
-		RenderError(w, http.StatusBadRequest, fmt.Errorf("invalid content type: %s", contenttype))
-		return
-	}
+	/*
+		contenttype := h.Header.Get("Content-Type")
+		if !imgexp.MatchString(contenttype) {
+			RenderError(w, http.StatusBadRequest, fmt.Errorf("invalid content type: %s", contenttype))
+			return
+		}
+	*/
 
 	// Create physical file
 	tempfile, err := ioutil.TempFile("", config.AppName()+"-")
