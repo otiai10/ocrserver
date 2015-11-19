@@ -25,8 +25,16 @@ func init() {
 func main() {
 
 	r := router.New()
+
+	// API
 	r.GET("/status", controllers.Status)
 	r.POST("/base64", controllers.Base64)
+	r.POST("/file", controllers.FileUpload)
+
+	r.Static("/assets", "assets")
+
+	// Sample Page
+	r.GET("/", controllers.Index)
 
 	logger := &Logger{Debug: config.IsDebug()}
 

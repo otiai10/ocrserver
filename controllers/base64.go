@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -38,8 +39,16 @@ func Base64(w http.ResponseWriter, r *http.Request) {
 		os.Remove(tempfile.Name())
 	}()
 
+	if len(body.Base64) == 0 {
+		RenderError(w, http.StatusBadRequest, fmt.Errorf("base64 string required"))
+		return
+	}
 	body.Base64 = regexp.MustCompile("data:image\\/png;base64,").ReplaceAllString(body.Base64, "")
-	b, _ := base64.StdEncoding.DecodeString(body.Base64)
+	b, err := base64.StdEncoding.DecodeString(body.Base64)
+	if err != nil {
+		RenderError(w, http.StatusBadRequest, err)
+		return
+	}
 	tempfile.Write(b)
 
 	// TODO: refactor gosseract
