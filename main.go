@@ -38,6 +38,7 @@ func main() {
 
 	logger := &Logger{Debug: config.IsDebug()}
 
+	logger.Printf("[%s]\tListenAndServe\t%s\n", time.Now().Format(time.RFC3339), config.Port())
 	http.ListenAndServe(config.Port(), logger.filter(r))
 }
 
