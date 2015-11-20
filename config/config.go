@@ -1,6 +1,11 @@
 package config
 
-import "github.com/BurntSushi/toml"
+import (
+	"path/filepath"
+	"runtime"
+
+	"github.com/BurntSushi/toml"
+)
 
 // values ...
 type values struct {
@@ -45,4 +50,10 @@ func AppName() string {
 // IsDebug ...
 func IsDebug() bool {
 	return v.Debug
+}
+
+// ProjectPath ...
+func ProjectPath(p ...string) string {
+	_, currfile, _, _ := runtime.Caller(0)
+	return filepath.Join(append([]string{filepath.Dir(filepath.Dir(currfile))}, p...)...)
 }

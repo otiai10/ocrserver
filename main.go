@@ -31,7 +31,7 @@ func main() {
 	r.POST("/base64", controllers.Base64)
 	r.POST("/file", controllers.FileUpload)
 
-	r.Static("/assets", "assets")
+	r.Static("/assets", config.ProjectPath("assets"))
 
 	// Sample Page
 	r.GET("/", controllers.Index)

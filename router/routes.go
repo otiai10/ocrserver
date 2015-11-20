@@ -64,8 +64,8 @@ func (router *Router) POST(path string, handler http.HandlerFunc) *Router {
 }
 
 // Static ...
-func (router *Router) Static(path string, dir http.Dir) *Router {
-	fs := http.FileServer(dir)
+func (router *Router) Static(path string, dir string) *Router {
+	fs := http.FileServer(http.Dir(dir))
 	router.static = static{
 		Path:   path,
 		Server: http.StripPrefix(path, fs),

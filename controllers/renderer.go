@@ -3,16 +3,15 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
-	"path/filepath"
-	"runtime"
 	"text/template"
+
+	"github.com/otiai10/ocrserver/config"
 )
 
 var _templates *template.Template
 
 func init() {
-	_, curr, _, _ := runtime.Caller(0)
-	tpl, err := template.ParseGlob(filepath.Join(filepath.Dir(filepath.Dir(curr)), "views/*.html"))
+	tpl, err := template.ParseGlob(config.ProjectPath("views/*.html"))
 	if err != nil {
 		panic(err)
 	}
