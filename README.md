@@ -4,6 +4,14 @@ The minimum OCR server by Golang
 
 # start
 
+use docker
+
+```sh
+docker run --rm -p 9900:9900 otiai10/ocrserver
+```
+
+or run from source code
+
 ```sh
 sudo apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr
 go get github.com/otiai10/ocrserver
