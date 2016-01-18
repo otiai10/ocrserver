@@ -18,6 +18,9 @@ var (
 
 // FileUpload ...
 func FileUpload(w http.ResponseWriter, r *http.Request) {
+
+	whitelist := r.FormValue("whitelist")
+	trim := r.FormValue("trim")
 	// Get uploaded file
 	r.ParseMultipartForm(32 << 20)
 	// upload, h, err := r.FormFile("file")
@@ -57,10 +60,10 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 	result := gosseract.Must(gosseract.Params{
 		Src:       tempfile.Name(),
 		Languages: "eng",
-		Whitelist: "",
+		Whitelist: whitelist,
 	})
 
 	Render(w, http.StatusOK, map[string]interface{}{
-		"result": strings.Trim(result, "\n"),
+		"result": strings.Trim(result, trim),
 	})
 }
