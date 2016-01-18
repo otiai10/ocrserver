@@ -32,7 +32,8 @@ curl -XPOST "http://localhost:9900/file" \
 -H "Content-Type: multipart/form-data"
 
 {
-	"result": "2,464 total"
+	"result": "2,464 total",
+	"version": "0.0.1",
 }
 ```
 
@@ -46,7 +47,8 @@ curl -XPOST "http://localhost:9900/file" \
 }'
 
 {
-	"result": "OCR"
+	"result": "OCR",
+	"version": "0.0.1",
 }
 ```
 

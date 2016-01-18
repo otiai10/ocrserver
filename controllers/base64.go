@@ -60,6 +60,7 @@ func Base64(w http.ResponseWriter, r *http.Request) {
 		Whitelist: body.Whitelist,
 	})
 	Render(w, http.StatusOK, map[string]interface{}{
-		"result": strings.Trim(result, body.Trim),
+		"result":  strings.Trim(result, body.Trim),
+		"version": config.Version(),
 	})
 }

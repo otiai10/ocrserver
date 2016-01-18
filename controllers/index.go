@@ -1,14 +1,8 @@
 package controllers
 
-import (
-	"net/http"
-
-	"github.com/otiai10/ocrserver/config"
-)
+import "net/http"
 
 // Index ...
 func Index(w http.ResponseWriter, r *http.Request) {
-	RenderHTML(w, http.StatusOK, "index.html", map[string]interface{}{
-		"port": config.Port(),
-	})
+	RenderHTML(w, http.StatusOK, "index.html", nil)
 }
