@@ -1,10 +1,9 @@
 package config
 
 import (
+	"os"
 	"path/filepath"
 	"runtime"
-
-	"github.com/BurntSushi/toml"
 )
 
 // values ...
@@ -15,25 +14,26 @@ type values struct {
 	Debug   bool   `toml:"debug"`
 }
 
-var v = values{
-	AppName: "ocrserver",
-	Version: "0.0.1-default",
-	Port:    ":9900",
-	Debug:   true,
-}
+// default config values
+const (
+	appname = "ocrserver"
+	port    = "9900"
+	debug   = true
+	version = "0.0.1-default" // change this
+)
 
-// InitWithFile ...
-func InitWithFile(fpath string) error {
-	_, err := toml.DecodeFile(fpath, &v)
-	if err != nil {
-		return err
-	}
-	// log.Println(meta)
-	return nil
+var v = values{
+	AppName: appname,
+	Port:    port,
+	Debug:   debug,
+	Version: version,
 }
 
 // Port ...
 func Port() string {
+	if port := os.Getenv("PORT"); port != "" {
+		return ":" + port
+	}
 	return v.Port
 }
 
@@ -44,6 +44,9 @@ func Version() string {
 
 // AppName ...
 func AppName() string {
+	if name := os.Getenv("APP_NAME"); name != "" {
+		return name
+	}
 	return v.AppName
 }
 

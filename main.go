@@ -1,9 +1,7 @@
 package main
 
 import (
-	"flag"
 	"fmt"
-	"log"
 	"net/http"
 	"time"
 
@@ -13,13 +11,7 @@ import (
 )
 
 func init() {
-	configfile := flag.String("conf", "", "config file")
-	flag.Parse()
-	if *configfile != "" {
-		if err := config.InitWithFile(*configfile); err != nil {
-			log.Fatalln(err)
-		}
-	}
+	// do something
 }
 
 func main() {
