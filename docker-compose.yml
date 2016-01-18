@@ -1,0 +1,5 @@
+ocrserver:
+  build: .
+  dockerfile: Dockerfile
+  ports:
+    - "9900:9900"
