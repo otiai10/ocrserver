@@ -8,6 +8,7 @@ use docker
 
 ```sh
 docker run --rm -p 9900:9900 otiai10/ocrserver
+# or just run `docker-compose up` if you have docker-compose
 ```
 
 or run from source code
