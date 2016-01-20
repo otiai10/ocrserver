@@ -1,4 +1,4 @@
-FROM heroku/go:1.5
+FROM golang:1.5
 
 MAINTAINER otiai10 <otiai10@gmail.com>
 
