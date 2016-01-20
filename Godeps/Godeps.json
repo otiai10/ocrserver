@@ -1,0 +1,18 @@
+{
+	"ImportPath": "github.com/otiai10/ocrserver",
+	"GoVersion": "go1.5.3",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/otiai10/gosseract",
+			"Comment": "1.0-47-ge4edcde",
+			"Rev": "e4edcdef441554a8f697f518de95f7f7ebec293a"
+		},
+		{
+			"ImportPath": "github.com/otiai10/marmoset",
+			"Rev": "b52e67dab80d000b3dc913b16f8f2c6434b15117"
+		}
+	]
+}
