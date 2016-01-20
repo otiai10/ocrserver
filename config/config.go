@@ -34,7 +34,7 @@ func Port() string {
 	if port := os.Getenv("PORT"); port != "" {
 		return ":" + port
 	}
-	return v.Port
+	return ":" + v.Port
 }
 
 // Version ...

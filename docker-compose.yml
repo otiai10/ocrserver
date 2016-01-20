@@ -1,5 +1,5 @@
-ocrserver:
+web:
   build: .
   dockerfile: Dockerfile
   ports:
-    - "9900:9900"
+    - "8080:8080"
