@@ -1,4 +1,4 @@
-FROM heroku/go:1.5.2
+FROM heroku/go:1.5
 
 MAINTAINER otiai10 <otiai10@gmail.com>
 
