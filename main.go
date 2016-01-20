@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -16,7 +17,7 @@ var logger *log.Logger
 
 func main() {
 
-	logger = log.New(os.Stdout, "[ocrserver] ", 0)
+	logger = log.New(os.Stdout, fmt.Sprintf("[%s] ", config.AppName()), 0)
 
 	r := marmoset.NewRouter()
 
@@ -34,6 +35,7 @@ func main() {
 		Add(&filters.LogFilter{Logger: logger}).
 		Server()
 
+	logger.Printf("listening on port %s", config.Port())
 	err := http.ListenAndServe(config.Port(), server)
 	logger.Println(err)
 }
