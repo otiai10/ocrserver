@@ -4,16 +4,21 @@ The minimum OCR server by Golang, and a tiny sample application of [gosseract](h
 
 [![icon](./assets/favicon.png)](https://github.com/otiai10/gosseract)
 
-# start
+# quick start
 
-use docker
+if already in docker host
 
 ```sh
-docker run --rm -p 9900:9900 otiai10/ocrserver
-# or just run `docker-compose up` if you have docker-compose
+docker run --rm -p 8080:8080 otiai10/ocrserver
 ```
 
-or run from source code
+or if you can use docker-compose
+
+```sh
+docker-compose up
+```
+
+otherwise, you need to install tesseract-ocr on your machine
 
 ```sh
 sudo apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr
@@ -58,5 +63,5 @@ curl -XPOST "http://localhost:9900/file" \
 
 ```sh
 % curl -XGET "http://localhost:9900/status"
-{"message":"Hello!","version":"0.0.1-default"}
+{"message":"Hello!","version":"0.0.1"}
 ```
