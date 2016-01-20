@@ -1,6 +1,6 @@
 {
 	"ImportPath": "github.com/otiai10/ocrserver",
-	"GoVersion": "go1.5.3",
+	"GoVersion": "go1.5.2",
 	"Packages": [
 		"./..."
 	],
