@@ -1,22 +1,24 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
-	"time"
+	"os"
+
+	"github.com/otiai10/marmoset"
 
 	"github.com/otiai10/ocrserver/config"
 	"github.com/otiai10/ocrserver/controllers"
-	"github.com/otiai10/ocrserver/router"
+	"github.com/otiai10/ocrserver/filters"
 )
 
-func init() {
-	// do something
-}
+var logger *log.Logger
 
 func main() {
 
-	r := router.New()
+	logger = log.New(os.Stdout, "[ocrserver]", 0)
+
+	r := marmoset.NewRouter()
 
 	// API
 	r.GET("/status", controllers.Status)
@@ -28,32 +30,10 @@ func main() {
 	// Sample Page
 	r.GET("/", controllers.Index)
 
-	logger := &Logger{Debug: config.IsDebug()}
+	server := marmoset.NewFilter(r).
+		Add(&filters.LogFilter{Logger: logger}).
+		Server()
 
-	logger.Printf("[%s]\tListenAndServe\t%s\n", time.Now().Format(time.RFC3339), config.Port())
-	http.ListenAndServe(config.Port(), logger.filter(r))
-}
-
-// Logger ...
-type Logger struct {
-	Debug   bool
-	handler http.Handler
-}
-
-// filter ...
-func (logger *Logger) filter(handler http.Handler) *Logger {
-	logger.handler = handler
-	return logger
-}
-
-// Printf ...
-func (logger *Logger) Printf(format string, v ...interface{}) {
-	if logger.Debug {
-		fmt.Printf(format, v...)
-	}
-}
-
-func (logger *Logger) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	logger.Printf("[%s]\t%s\t%s\n", time.Now().Format(time.RFC3339), r.Method, r.URL.String()) // とりあえず
-	logger.handler.ServeHTTP(w, r)
+	err := http.ListenAndServe(config.Port(), server)
+	logger.Println(err)
 }

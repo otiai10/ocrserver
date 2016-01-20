@@ -17,7 +17,7 @@ type values struct {
 // default config values
 const (
 	appname = "ocrserver"
-	port    = "9900"
+	port    = "8080"
 	debug   = true
 	version = "0.0.1-default" // change this
 )
