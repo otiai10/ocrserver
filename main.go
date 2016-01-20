@@ -16,7 +16,7 @@ var logger *log.Logger
 
 func main() {
 
-	logger = log.New(os.Stdout, "[ocrserver]", 0)
+	logger = log.New(os.Stdout, "[ocrserver] ", 0)
 
 	r := marmoset.NewRouter()
 

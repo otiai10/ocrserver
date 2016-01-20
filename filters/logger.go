@@ -13,6 +13,6 @@ type LogFilter struct {
 
 // ServeHTTP ...
 func (h LogFilter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	h.Logger.Printf("  %s  %s", r.Method, r.URL.Path)
+	h.Logger.Printf("%s %s", r.Method, r.URL.Path)
 	h.Next.ServeHTTP(w, r)
 }
