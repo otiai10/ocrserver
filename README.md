@@ -1,8 +1,11 @@
 # ocrserver
 
+[![icon](./assets/favicon.png)](https://github.com/otiai10/gosseract)
+
 The minimum OCR server by Golang, and a tiny sample application of [gosseract](https://github.com/otiai10/gosseract).
 
-[![icon](./assets/favicon.png)](https://github.com/otiai10/gosseract)
+![page](./assets/page-image.png)
+
 
 # quick start
 
