@@ -11,11 +11,15 @@ import (
 	"strings"
 
 	"github.com/otiai10/gosseract"
+	"github.com/otiai10/marmoset"
 	"github.com/otiai10/ocrserver/config"
 )
 
 // Base64 ...
 func Base64(w http.ResponseWriter, r *http.Request) {
+
+	render := marmoset.Render(w, true)
+
 	var body = new(struct {
 		Base64    string `json:"base64"`
 		Trim      string `json:"trim"`
@@ -25,13 +29,13 @@ func Base64(w http.ResponseWriter, r *http.Request) {
 
 	err := json.NewDecoder(r.Body).Decode(body)
 	if err != nil {
-		RenderError(w, http.StatusBadRequest, err)
+		render.JSON(http.StatusBadRequest, err)
 		return
 	}
 
 	tempfile, err := ioutil.TempFile("", config.AppName()+"-")
 	if err != nil {
-		RenderError(w, http.StatusInternalServerError, err)
+		render.JSON(http.StatusInternalServerError, err)
 		return
 	}
 	defer func() {
@@ -40,13 +44,13 @@ func Base64(w http.ResponseWriter, r *http.Request) {
 	}()
 
 	if len(body.Base64) == 0 {
-		RenderError(w, http.StatusBadRequest, fmt.Errorf("base64 string required"))
+		render.JSON(http.StatusBadRequest, fmt.Errorf("base64 string required"))
 		return
 	}
 	body.Base64 = regexp.MustCompile("data:image\\/png;base64,").ReplaceAllString(body.Base64, "")
 	b, err := base64.StdEncoding.DecodeString(body.Base64)
 	if err != nil {
-		RenderError(w, http.StatusBadRequest, err)
+		render.JSON(http.StatusBadRequest, err)
 		return
 	}
 	tempfile.Write(b)
@@ -59,7 +63,7 @@ func Base64(w http.ResponseWriter, r *http.Request) {
 		Languages: body.Languages,
 		Whitelist: body.Whitelist,
 	})
-	Render(w, http.StatusOK, map[string]interface{}{
+	render.JSON(http.StatusOK, map[string]interface{}{
 		"result":  strings.Trim(result, body.Trim),
 		"version": config.Version(),
 	})

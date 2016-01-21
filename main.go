@@ -26,14 +26,13 @@ func main() {
 	r.POST("/base64", controllers.Base64)
 	r.POST("/file", controllers.FileUpload)
 
-	r.Static("/assets", config.ProjectPath("assets"))
+	r.StaticRelative("/assets", "./assets")
+	marmoset.LoadViews("./views")
 
 	// Sample Page
 	r.GET("/", controllers.Index)
 
-	server := marmoset.NewFilter(r).
-		Add(&filters.LogFilter{Logger: logger}).
-		Server()
+	server := marmoset.NewFilter(r).Add(&filters.LogFilter{Logger: logger}).Server()
 
 	logger.Printf("listening on port %s", config.Port())
 	err := http.ListenAndServe(config.Port(), server)
