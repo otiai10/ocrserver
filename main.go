@@ -26,7 +26,7 @@ func main() {
 	r.POST("/base64", controllers.Base64)
 	r.POST("/file", controllers.FileUpload)
 
-	r.StaticRelative("/assets", "./assets")
+	r.Static("/assets", "./assets")
 	marmoset.LoadViews("./views")
 
 	// Sample Page
