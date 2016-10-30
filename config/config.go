@@ -1,17 +1,13 @@
 package config
 
-import (
-	"os"
-	"path/filepath"
-	"runtime"
-)
+import "os"
 
 // values ...
 type values struct {
-	AppName string `toml:"appname"`
-	Version string `toml:"version"`
-	Port    string `toml:"port"`
-	Debug   bool   `toml:"debug"`
+	AppName string `json:"appname"`
+	Version string `json:"version"`
+	Port    string `json:"port"`
+	Debug   bool   `json:"debug"`
 }
 
 // default config values
@@ -53,10 +49,4 @@ func AppName() string {
 // IsDebug ...
 func IsDebug() bool {
 	return v.Debug
-}
-
-// ProjectPath ...
-func ProjectPath(p ...string) string {
-	_, currfile, _, _ := runtime.Caller(0)
-	return filepath.Join(append([]string{filepath.Dir(filepath.Dir(currfile))}, p...)...)
 }
