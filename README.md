@@ -1,6 +1,9 @@
+
 # ocrserver
 
-The minimum OCR server by Golang, as a tiny sample application of [gosseract](https://github.com/otiai10/gosseract).
+Simple OCR server, as a small working sample for [gosseract](https://github.com/otiai10/gosseract).
+
+Try now here https://ocr-example.herokuapp.com/, and deploy your own now.
 
 # Deploy
 
@@ -12,7 +15,7 @@ The minimum OCR server by Golang, as a tiny sample application of [gosseract](ht
 
 `docker run --rm -p 8080:8080 otiai10/ocrserver`
 
-## manual
+## manual deploy
 
 ```sh
 sudo apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr
@@ -24,7 +27,7 @@ $GOPATH/bin/ocrserver
 
 ## GET `/`
 
-![page](./assets/page-image.png)
+<a href="https://ocr-example.herokuapp.com/"><img src="./assets/page-image.png" height="200px" /></a>
 
 ## POST `/file`
 
