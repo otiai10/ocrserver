@@ -27,7 +27,6 @@ func main() {
 	r.POST("/file", controllers.FileUpload)
 
 	r.Static("/assets", "./assets")
-	marmoset.LoadViews("./views")
 
 	// Sample Page
 	r.GET("/", controllers.Index)
