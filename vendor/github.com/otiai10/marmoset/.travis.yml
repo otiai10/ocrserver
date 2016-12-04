@@ -1,0 +1,9 @@
+language: go
+
+go:
+    - 1.7
+    - tip
+before_script:
+    - go get github.com/otiai10/mint
+script:
+    - go test ./... -v

@@ -1,0 +1,18 @@
+language: go
+
+go:
+    - 1.5
+    - 1.6
+    - 1.7
+    # - tip
+compiler:
+    - g++
+before_install:
+    - sudo apt-get -qq update
+    - sudo apt-get install tesseract-ocr
+    - sudo apt-get install libtesseract-dev
+    - sudo apt-get install libleptonica-dev
+before_script:
+    - go get github.com/otiai10/mint
+script:
+    - go test ./... -v -bench .
