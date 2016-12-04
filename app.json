@@ -1,0 +1,23 @@
+{
+  "name": "OCR Server on Heroku",
+  "description": "Simple OCR Server by Golang on Heroku",
+  "keywords": [],
+  "image": "heroku/go:1.6",
+  "mount_dir": "src/github.com/otiai10/ocrserver",
+  "website": "http://github.com/otiai10/ocrserver",
+  "repository": "http://github.com/otiai10/ocrserver",
+  "buildpacks": [
+      {
+          "url": "https://github.com/heroku/heroku-buildpack-apt.git"
+      },
+      {
+          "url": "heroku/go"
+      }
+  ],
+  "env": {
+    "TESSDATA_PREFIX": {
+      "description": "parent directry of `tessdata`",
+      "value": "/app/.apt/usr/share/tesseract-ocr"
+    }
+  }
+}
