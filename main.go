@@ -31,7 +31,11 @@ func main() {
 	// Sample Page
 	r.GET("/", controllers.Index)
 
-	server := marmoset.NewFilter(r).Add(&filters.LogFilter{Logger: logger}).Server()
+	chain := marmoset.NewFilter(r)
+	if os.Getenv("OCRSERVER_LOG_ENABLED") == "1" {
+		chain.Add(&filters.LogFilter{Logger: logger})
+	}
+	server := chain.Server()
 
 	logger.Printf("listening on port %s", config.Port())
 	err := http.ListenAndServe(config.Port(), server)
