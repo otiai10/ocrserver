@@ -10,7 +10,6 @@ import (
 
 	"github.com/otiai10/gosseract"
 	"github.com/otiai10/marmoset"
-	"github.com/otiai10/ocrserver/config"
 )
 
 var (
@@ -35,7 +34,7 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 	defer upload.Close()
 
 	// Create physical file
-	tempfile, err := ioutil.TempFile("", config.AppName()+"-")
+	tempfile, err := ioutil.TempFile("", "ocrserver"+"-")
 	if err != nil {
 		render.JSON(http.StatusBadRequest, err)
 		return
@@ -59,6 +58,6 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 
 	render.JSON(http.StatusOK, map[string]interface{}{
 		"result":  strings.Trim(result, trim),
-		"version": config.Version(),
+		"version": version,
 	})
 }

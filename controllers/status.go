@@ -4,13 +4,14 @@ import (
 	"net/http"
 
 	"github.com/otiai10/marmoset"
-	"github.com/otiai10/ocrserver/config"
 )
+
+const version = "0.1.0"
 
 // Status ...
 func Status(w http.ResponseWriter, r *http.Request) {
 	marmoset.Render(w, true).JSON(http.StatusOK, map[string]interface{}{
 		"message": "Hello!",
-		"version": config.Version(),
+		"version": version,
 	})
 }

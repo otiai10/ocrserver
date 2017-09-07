@@ -12,7 +12,6 @@ import (
 
 	"github.com/otiai10/gosseract"
 	"github.com/otiai10/marmoset"
-	"github.com/otiai10/ocrserver/config"
 )
 
 // Base64 ...
@@ -33,7 +32,7 @@ func Base64(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tempfile, err := ioutil.TempFile("", config.AppName()+"-")
+	tempfile, err := ioutil.TempFile("", "ocrserver"+"-")
 	if err != nil {
 		render.JSON(http.StatusInternalServerError, err)
 		return
@@ -65,6 +64,6 @@ func Base64(w http.ResponseWriter, r *http.Request) {
 	})
 	render.JSON(http.StatusOK, map[string]interface{}{
 		"result":  strings.Trim(result, body.Trim),
-		"version": config.Version(),
+		"version": version,
 	})
 }
