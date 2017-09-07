@@ -9,4 +9,4 @@ ADD . $GOPATH/src/github.com/otiai10/ocrserver
 WORKDIR $GOPATH/src/github.com/otiai10/ocrserver
 RUN go get ./...
 
-ENTRYPOINT $GOPATH/bin/ocrserver
+CMD $GOPATH/bin/ocrserver

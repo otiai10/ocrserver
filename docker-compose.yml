@@ -1,6 +1,7 @@
 web:
-  container_name: "web"
   build: .
   dockerfile: Dockerfile
   ports:
     - "8080:8080"
+  environment:
+    PORT: 8080
