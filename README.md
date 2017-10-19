@@ -7,18 +7,26 @@ Try now here https://ocr-example.herokuapp.com/, and deploy your own now.
 
 # Quick Start
 
-## Local Development
+## Ready-Made Image
 
-with [docker](https://www.docker.com/products/docker-toolbox) and [docker-compose](https://www.docker.com/products/docker-toolbox) required
+```sh
+% docker run -it --rm \
+  -e PORT=7777 -p 8080:7777 \
+  otiai10/ocrserver
+```
+
+cf. [docker](https://www.docker.com/products/docker-toolbox)
+
+## Local Development
 
 ```sh
 % docker-compose up
 # open http://localhost:8080
 ```
 
-## Deploy to Heroku
+cf. [docker-compose](https://www.docker.com/products/docker-toolbox)
 
-with also [heroku cli](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) required
+## Deploy to Heroku
 
 ```sh
 % heroku create
@@ -26,6 +34,8 @@ with also [heroku cli](https://devcenter.heroku.com/articles/heroku-cli#download
 % heroku container:push web
 # heroku open
 ```
+
+cf. [heroku cli](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
 
 # Documents
 
