@@ -54,16 +54,23 @@ func Base64(w http.ResponseWriter, r *http.Request) {
 	}
 	tempfile.Write(b)
 
-	// TODO: refactor gosseract
-	body.Languages = "eng"
+	client := gosseract.NewClient()
+	defer client.Close()
 
-	result := gosseract.Must(gosseract.Params{
-		Src:       tempfile.Name(),
-		Languages: body.Languages,
-		Whitelist: body.Whitelist,
-	})
+	client.Languages = []string{"eng"}
+	client.SetImage(tempfile.Name())
+	if body.Whitelist != "" {
+		client.SetWhitelist(body.Whitelist)
+	}
+
+	text, err := client.Text()
+	if err != nil {
+		render.JSON(http.StatusInternalServerError, err)
+		return
+	}
+
 	render.JSON(http.StatusOK, map[string]interface{}{
-		"result":  strings.Trim(result, body.Trim),
+		"result":  strings.Trim(text, body.Trim),
 		"version": version,
 	})
 }

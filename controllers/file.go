@@ -21,8 +21,6 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 
 	render := marmoset.Render(w, true)
 
-	whitelist := r.FormValue("whitelist")
-	trim := r.FormValue("trim")
 	// Get uploaded file
 	r.ParseMultipartForm(32 << 20)
 	// upload, h, err := r.FormFile("file")
@@ -45,19 +43,28 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 	}()
 
 	// Make uploaded physical
-	if _, err := io.Copy(tempfile, upload); err != nil {
+	if _, err = io.Copy(tempfile, upload); err != nil {
 		render.JSON(http.StatusInternalServerError, err)
 		return
 	}
 
-	result := gosseract.Must(gosseract.Params{
-		Src:       tempfile.Name(),
-		Languages: "eng",
-		Whitelist: whitelist,
-	})
+	client := gosseract.NewClient()
+	defer client.Close()
+
+	client.SetImage(tempfile.Name())
+	client.Languages = []string{"eng"}
+	if whitelist := r.FormValue("whitelist"); whitelist != "" {
+		client.SetWhitelist(whitelist)
+	}
+
+	text, err := client.Text()
+	if err != nil {
+		render.JSON(http.StatusBadRequest, err)
+		return
+	}
 
 	render.JSON(http.StatusOK, map[string]interface{}{
-		"result":  strings.Trim(result, trim),
+		"result":  strings.Trim(text, r.FormValue("trim")),
 		"version": version,
 	})
 }
