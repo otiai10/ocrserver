@@ -1,4 +1,4 @@
-FROM golang:1.8
+FROM golang:1.9
 
 MAINTAINER otiai10 <otiai10@gmail.com>
 
@@ -8,5 +8,7 @@ RUN apt-get install -y libleptonica-dev libtesseract-dev tesseract-ocr
 ADD . $GOPATH/src/github.com/otiai10/ocrserver
 WORKDIR $GOPATH/src/github.com/otiai10/ocrserver
 RUN go get ./...
+RUN go get -t github.com/otiai10/gosseract
+RUN go test -v github.com/otiai10/gosseract
 
 CMD $GOPATH/bin/ocrserver
