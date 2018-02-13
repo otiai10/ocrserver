@@ -3,38 +3,97 @@
 <head>
   <title>{{.AppName}}</title>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="shortcut icon" href="/assets/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+  <link rel="stylesheet" href="/assets/css/index.css" />
+  <script defer src="//use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
   <script type="text/javascript" src="/assets/js/index.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>{{.AppName}}</h1>
-    <pre id="response"></pre>
-    <div class="row">
-      <div class="col-xs-6">
-        <h2>File</h2>
-        <input id="file" type="file" accept="image/*"><br>
-      </div>
-      <div class="col-xs-6">
-        <h2>or base64</h2>
-        <textarea id="base64" class="form-control"></textarea>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>options</h2>
-        <textarea id="options" class="form-control" rows="4">{
-          "whitelist": "OCR1234567890",
-          "trim": "\n"
-        }</textarea>
-        <ul>
-          <li><code>whitelist (optional): allowed characters</code></li>
-          <li><code>trim (optional): characters to trim out</code></li>
-        </ul>
+
+  <!-- Powered by http://tholman.com/github-corners/ -->
+  <a href="https://github.com/otiai10/ocrserver" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#fff; color:#303030; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+  <section class="hero is-mono">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+            <p class="title">
+              Graphical API Client for <b><a href="https://github.com/otiai10/ocrserver">OCRSERVER</a></b>
+            </p>
+            <p class="subtitle">
+              or a working example of how to use <a href="https://github.com/otiai10/gosseract">gosseract</a>: OCR package for Golang.
+          </div>
+        </div>
       </div>
     </div>
-    <div class="pull-right"><button id="submit" class="btn btn-default">submit</button></div>
-  </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+
+        <div class="column">
+
+          <p class="title">Input</p>
+          <p class="subtitle">File or base64 encoded string</p>
+
+          <div class="card">
+            <div class="card-content">
+              <div class="content">
+                <div class="img-container">
+                  <img id="img" src=""/>
+                  <p>No Image Selected</p>
+                </div>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a class="card-footer-item">File</a>
+              <a class="card-footer-item">base64</a>
+              <a class="card-footer-item">Cancel</a>
+            </footer>
+          </div>
+
+        </div>
+
+        <div class="column">
+          <p class="title">Options</p>
+          <p class="subtitle">Optional flags</p>
+
+          <div class="field">
+            <label class="label">Languages</label>
+            <div class="control">
+              <input class="input" type="text" name="langs" placeholder="eng,jpn">
+            </div>
+            <p class="help">Comma serapated language codes</p>
+          </div>
+
+          <div class="field">
+            <label class="label">Char Whitelist</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="abc012_-/">
+            </div>
+            <p class="help">You can specify strict chars to be detected</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column is-half is-offset-one-quarter">
+          <button class="button is-info is-fullwidth is-medium">submit</button>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <p class="title">Output</p>
+          <pre id="response">{}</pre>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
 </body>
 </html>

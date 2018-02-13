@@ -1,0 +1,33 @@
+* {
+  transition: all 0.1s;
+}
+
+/* Hero */
+.hero.is-mono {
+  background-color: #303030;
+}
+.hero.is-mono *:not(a) {
+  color: #ffffff;
+}
+.hero.is-mono a:hover {
+  color: #40a0fd;
+}
+
+/* Image Container */
+.img-container {
+  text-align: center;
+  background-size: contain;
+}
+.img-container>img {
+  display: block;
+  object-fit: contain;
+}
+.img-container>img:not([src=""]) {
+  width: 100%;
+}
+.img-container>img:not([src=""]) + p {
+  display: none;
+}
+.img-container>img[src=""] {
+  display: none;
+}
