@@ -58,6 +58,9 @@ func Base64(w http.ResponseWriter, r *http.Request) {
 	defer client.Close()
 
 	client.Languages = []string{"eng"}
+	if body.Languages != "" {
+		client.Languages = strings.Split(body.Languages, ",")
+	}
 	client.SetImage(tempfile.Name())
 	if body.Whitelist != "" {
 		client.SetWhitelist(body.Whitelist)

@@ -53,6 +53,9 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 
 	client.SetImage(tempfile.Name())
 	client.Languages = []string{"eng"}
+	if langs := r.FormValue("languages"); langs != "" {
+		client.Languages = strings.Split(langs, ",")
+	}
 	if whitelist := r.FormValue("whitelist"); whitelist != "" {
 		client.SetWhitelist(whitelist)
 	}

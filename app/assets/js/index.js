@@ -21,6 +21,8 @@ window.onload = () => {
     btnBase64: document.getElementById("by-base64"),
     cancel:    document.getElementById("cancel-input"),
     file:      document.getElementById("file"),
+    langs:     document.querySelector("input[name=langs]"),
+    whitelist: document.querySelector("input[name=whitelist]"),
     submit:    document.getElementById("submit"),
     show:      uri => ui.image.setAttribute("src", uri),
     clear:     () => { ui.image.setAttribute("src", ""), ui.file.value = ''; },
@@ -52,10 +54,14 @@ window.onload = () => {
     if (ui.file.files && ui.file.files.length != 0) {
       req.path = "/file";
       req.data = new FormData();
+      if (ui.langs.value) req.data.append("languages", ui.langs.value);
+      if (ui.whitelist.value) req.data.append("whitelist", ui.whitelist.value);
       req.data.append("file", ui.file.files[0]);
     } else if (/^data:.+/.test(ui.image.src)) {
       req.path = "/base64";
       var data = {base64: ui.image.src};
+      if (ui.langs.value) data["languages"] = ui.langs.value;
+      if (ui.whitelist.value) data["whitelist"] = ui.whitelist.value;
       req.data = JSON.stringify(data);
     } else {
       return window.alert("no image input set");
