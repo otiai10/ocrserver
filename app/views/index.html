@@ -23,7 +23,7 @@
               Graphical API Client for <b><a href="https://github.com/otiai10/ocrserver">OCRSERVER</a></b>
             </p>
             <p class="subtitle">
-              or a working example of how to use <a href="https://github.com/otiai10/gosseract">gosseract</a>: OCR package for Golang.
+              or a working example of <a href="https://github.com/otiai10/gosseract">gosseract</a>
           </div>
         </div>
       </div>
@@ -49,9 +49,10 @@
               </div>
             </div>
             <footer class="card-footer">
-              <a class="card-footer-item">File</a>
-              <a class="card-footer-item">base64</a>
-              <a class="card-footer-item">Cancel</a>
+              <a class="card-footer-item" id="by-file">File</a>
+              <a class="card-footer-item" id="by-base64">base64</a>
+              <a class="card-footer-item" id="cancel-input">Cancel</a>
+              <input type="file" accept="image/*" style="display:none" id="file" />
             </footer>
           </div>
 
@@ -82,13 +83,13 @@
 
       <div class="columns">
         <div class="column is-half is-offset-one-quarter">
-          <button class="button is-info is-fullwidth is-medium">submit</button>
+          <button class="button is-info is-fullwidth is-medium" id="submit">submit</button>
         </div>
       </div>
       <div class="columns">
         <div class="column">
           <p class="title">Output</p>
-          <pre id="response">{}</pre>
+          <pre id="output">{}</pre>
         </div>
       </div>
     </div>

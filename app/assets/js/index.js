@@ -1,64 +1,65 @@
 "use strict"; // ES6
 window.onload = () => {
+
   var http = {
     post: (path, data) => {
       return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", path, true);
         xhr.onreadystatechange = () => {
-          if (xhr.readyState != XMLHttpRequest.DONE) return;
-          if (xhr.status != 200) return reject(xhr.response);
-          return resolve(xhr.response);
+          if (xhr.readyState == XMLHttpRequest.DONE) return resolve(xhr);
         };
         xhr.send(data);
       });
     }
   };
-  var render = {
-    response: document.getElementById("response"),
-    _options: document.getElementById("options"),
-    success: (res) => {
-      render.response.innerHTML = JSON.stringify(JSON.parse(res), null, 2);
-    },
-    error: (res) => {
-      try {
-        render.response.innerHTML = JSON.stringify(JSON.parse(res), null, 2);
-      } catch (e) {
-        render.response.innerHTML = JSON.stringify(res, null, 2);
-      }
-    },
-    options: (json) => {
-      render._options.value = JSON.stringify(json, null, 8);
-    }
+
+  var ui = {
+    output:    document.getElementById("output"),
+    image:     document.querySelector("img#img"),
+    btnFile:   document.getElementById("by-file"),
+    btnBase64: document.getElementById("by-base64"),
+    cancel:    document.getElementById("cancel-input"),
+    file:      document.getElementById("file"),
+    submit:    document.getElementById("submit"),
+    show:      uri => ui.image.setAttribute("src", uri),
+    clear:     () => { ui.image.setAttribute("src", ""), ui.file.value = ''; },
   };
+
+  ui.file.addEventListener("change", ev => {
+    if (!ev.target.files || !ev.target.files.length) return null;
+    const r = new FileReader();
+    r.onload = e => ui.show(e.target.result);
+    r.readAsDataURL(ev.target.files[0]);
+  });
+  ui.btnFile.addEventListener("click", () => ui.file.click());
+  ui.btnBase64.addEventListener("click", () => {
+    const uri = window.prompt("Please paste your base64 image URI");
+    if (uri) { ui.show(uri); ui.file.files = null; }
+  });
+  ui.cancel.addEventListener("click", () => ui.clear());
+  ui.submit.addEventListener("click", () => {
+    ui.output.innerText = "{}";
+    const req = generateRequest();
+    if (!req) return;
+    http.post(req.path, req.data).then(xhr => {
+      ui.output.innerText = `${xhr.status} ${xhr.statusText}\n-----\n${xhr.response}`;
+    });
+  })
+
   var generateRequest = () => {
-    var files = document.getElementById("file").files;
-    var base64 = document.getElementById("base64").value;
-    var options = document.getElementById("options").value;
-    try {
-      options = JSON.parse(options);
-    } catch (e) {
-      options = {};
-    }
-    render.options(options);
     var req = {path: "", data: null};
-    if (files.length > 0) {
+    if (ui.file.files && ui.file.files.length != 0) {
       req.path = "/file";
       req.data = new FormData();
-      req.data.append("file", files[0]);
-      req.data.append("whitelist", options.whitelist || "");
-      req.data.append("trim", options.trim || "");
-    } else if (base64) {
+      req.data.append("file", ui.file.files[0]);
+    } else if (/^data:.+/.test(ui.image.src)) {
       req.path = "/base64";
-      var data = {base64: base64};
-      data.whitelist = options.whitelist;
-      data.trim = options.trim;
+      var data = {base64: ui.image.src};
       req.data = JSON.stringify(data);
+    } else {
+      return window.alert("no image input set");
     }
     return req;
   };
-  document.getElementById("submit").addEventListener("click", () => {
-    var req = generateRequest();
-    http.post(req.path, req.data).then(render.success).catch(render.error);
-  });
 };
