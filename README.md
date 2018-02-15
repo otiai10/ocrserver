@@ -1,9 +1,10 @@
-
 # ocrserver
 
 Simple OCR server, as a small working sample for [gosseract](https://github.com/otiai10/gosseract).
 
 Try now here https://ocr-example.herokuapp.com/, and deploy your own now.
+
+[![Build Status](https://travis-ci.org/otiai10/ocrserver.svg?branch=master)](https://travis-ci.org/otiai10/ocrserver)
 
 # Deploy to Heroku
 
