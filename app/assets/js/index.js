@@ -24,8 +24,12 @@ window.onload = () => {
     langs:     document.querySelector("input[name=langs]"),
     whitelist: document.querySelector("input[name=whitelist]"),
     submit:    document.getElementById("submit"),
+    loading:   document.querySelector("button#submit>span:first-child"),
+    standby:   document.querySelector("button#submit>span:last-child"),
     show:      uri => ui.image.setAttribute("src", uri),
     clear:     () => { ui.image.setAttribute("src", ""), ui.file.value = ''; },
+    start:     () => { ui.loading.style.display = "block"; ui.standby.style.display = "none"; ui.submit.setAttribute("disabled", true); ui.output.innerText = "{}"; },
+    finish:    () => { ui.loading.style.display = "none"; ui.standby.style.display = "block"; ui.submit.removeAttribute("disabled"); },
   };
 
   ui.file.addEventListener("change", ev => {
@@ -41,12 +45,13 @@ window.onload = () => {
   });
   ui.cancel.addEventListener("click", () => ui.clear());
   ui.submit.addEventListener("click", () => {
-    ui.output.innerText = "{}";
+    ui.start();
     const req = generateRequest();
-    if (!req) return;
+    if (!req) return ui.finish();
     http.post(req.path, req.data).then(xhr => {
       ui.output.innerText = `${xhr.status} ${xhr.statusText}\n-----\n${xhr.response}`;
-    });
+      ui.finish();
+    }).catch(() => ui.finish());
   })
 
   var generateRequest = () => {

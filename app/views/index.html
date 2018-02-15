@@ -83,7 +83,16 @@
 
       <div class="columns">
         <div class="column is-half is-offset-one-quarter">
-          <button class="button is-info is-fullwidth is-medium" id="submit">submit</button>
+          <button class="button is-info is-fullwidth is-medium" id="submit">
+            <span style="display:none;">
+              <span id="loading" class="icon"><i class="fas fa-spinner fa-pulse"></i></span>
+              <span style="vertical-align:top;">Processing...</span>
+            </span>
+            <span>
+              <span id="standby" class="icon"><i class="fas fa-spinner fa-paper-plane"></i></span>
+              <span style="vertical-align:top;">Submit</span>
+            </span>
+          </button>
         </div>
       </div>
       <div class="columns">
