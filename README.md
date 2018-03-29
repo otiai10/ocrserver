@@ -1,3 +1,5 @@
+<p align="left"><img src="logo/horizontal.png" alt="ocrserver" height="150px"></p>
+
 # ocrserver
 
 [![Build Status](https://travis-ci.org/otiai10/ocrserver.svg?branch=master)](https://travis-ci.org/otiai10/ocrserver)
