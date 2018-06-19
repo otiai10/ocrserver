@@ -55,6 +55,14 @@ If you have tesseract-ocr  and library files on your machine
 
 cf. [gosseract](https://github.com/otiai10/gosseract)
 
+## Dependencies
+
+This project is strongly encouraged to follow **the newest versions of dependencies**, however, if you want to freeze or use freezed versions of dependencies you can use `dep`.
+
+```
+% dep ensure
+```
+
 # Documents
 
 - [API Endpoints](https://github.com/otiai10/ocrserver/wiki/API-Endpoints)
