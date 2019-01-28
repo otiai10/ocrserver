@@ -10,12 +10,12 @@
   version = "v1.0.1"
 
 [[projects]]
-  digest = "1:067a8ab579d86dba4a0d04fe0b709b33991dfeba3c651b0723fcb795152860d4"
+  digest = "1:95480c434d71605ec2786d37770970ad560a0902ae151551533d10662deb8153"
   name = "github.com/otiai10/gosseract"
   packages = ["."]
   pruneopts = ""
-  revision = "b026a6fd291f00736db60738f4e83a79d26359cb"
-  version = "v2.2.0"
+  revision = "5bb1d6fc20fa3fafb3236d6c93c393369e4b38d9"
+  version = "v2.2.1"
 
 [[projects]]
   digest = "1:1d00d58514dc747c6dfffb50196faddba7e3d896c65262e92a1eda6124c59f7b"
