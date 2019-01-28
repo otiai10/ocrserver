@@ -1,4 +1,4 @@
-FROM golang:1.9
+FROM golang:1.11
 
 MAINTAINER otiai10 <otiai10@gmail.com>
 
