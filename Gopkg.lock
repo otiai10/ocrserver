@@ -2,32 +2,52 @@
 
 
 [[projects]]
+  digest = "1:6d5a057da97a9dbdb10e7beedd2f43452b6bf7691001c0c8886e8dacf5610349"
+  name = "bou.ke/monkey"
+  packages = ["."]
+  pruneopts = ""
+  revision = "bdf6dea004c6fd1cdf4b25da8ad45a606c09409a"
+  version = "v1.0.1"
+
+[[projects]]
+  digest = "1:067a8ab579d86dba4a0d04fe0b709b33991dfeba3c651b0723fcb795152860d4"
   name = "github.com/otiai10/gosseract"
   packages = ["."]
+  pruneopts = ""
   revision = "b026a6fd291f00736db60738f4e83a79d26359cb"
   version = "v2.2.0"
 
 [[projects]]
+  digest = "1:1d00d58514dc747c6dfffb50196faddba7e3d896c65262e92a1eda6124c59f7b"
   name = "github.com/otiai10/marmoset"
   packages = ["."]
+  pruneopts = ""
   revision = "af97a62a537539c23bf36f5d982a4a90948cab53"
   version = "0.2.0"
 
 [[projects]]
+  digest = "1:62d6b41fe9d057eff28e73e2555b07d6452669fd3ae50cc1efb4456bce1fd71b"
   name = "github.com/otiai10/mint"
   packages = ["."]
-  revision = "35730131bb808e17c9f26f1204a9bcc6f9e12fb4"
-  version = "1.1"
+  pruneopts = ""
+  revision = "8151274669299c20b45d5199f7fde456181b711e"
+  version = "v1.2.1"
 
 [[projects]]
   branch = "master"
+  digest = "1:1e9704e5379e68ac473c28aeb3f7e7cd4036ae8a246bf0285b5ebdbb8e0cfacf"
   name = "golang.org/x/net"
   packages = ["context"]
-  revision = "db08ff08e8622530d9ed3a0e8ac279f6d4c02196"
+  pruneopts = ""
+  revision = "d26f9f9a57f3fab6a695bec0d84433c2c50f8bbf"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "2a183618197df42683b3f75074298b30e47c1c16fc832231be53534cf31e6b2d"
+  input-imports = [
+    "github.com/otiai10/gosseract",
+    "github.com/otiai10/marmoset",
+    "github.com/otiai10/mint",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
