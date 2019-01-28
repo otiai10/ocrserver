@@ -18,12 +18,12 @@
   version = "v2.2.1"
 
 [[projects]]
-  digest = "1:1d00d58514dc747c6dfffb50196faddba7e3d896c65262e92a1eda6124c59f7b"
+  digest = "1:a313d379890f6fe1471686105e4a355019769e872d33dfe08376734b4c44e22a"
   name = "github.com/otiai10/marmoset"
   packages = ["."]
   pruneopts = ""
-  revision = "af97a62a537539c23bf36f5d982a4a90948cab53"
-  version = "0.2.0"
+  revision = "2adcf18928cbc73d640249eed0ac8e49ce4bdcb8"
+  version = "0.4.0"
 
 [[projects]]
   digest = "1:62d6b41fe9d057eff28e73e2555b07d6452669fd3ae50cc1efb4456bce1fd71b"

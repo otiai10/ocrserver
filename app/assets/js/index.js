@@ -23,6 +23,7 @@ window.onload = () => {
     file:      document.getElementById("file"),
     langs:     document.querySelector("input[name=langs]"),
     whitelist: document.querySelector("input[name=whitelist]"),
+    hocr:      document.querySelector("input[name=hocr]"),
     submit:    document.getElementById("submit"),
     loading:   document.querySelector("button#submit>span:first-child"),
     standby:   document.querySelector("button#submit>span:last-child"),
@@ -61,12 +62,14 @@ window.onload = () => {
       req.data = new FormData();
       if (ui.langs.value) req.data.append("languages", ui.langs.value);
       if (ui.whitelist.value) req.data.append("whitelist", ui.whitelist.value);
+      if (ui.hocr.checked) req.data.append("format", "hocr");
       req.data.append("file", ui.file.files[0]);
     } else if (/^data:.+/.test(ui.image.src)) {
       req.path = "/base64";
       var data = {base64: ui.image.src};
       if (ui.langs.value) data["languages"] = ui.langs.value;
       if (ui.whitelist.value) data["whitelist"] = ui.whitelist.value;
+      if (ui.hocr.checked) data["format"] = "hocr";
       req.data = JSON.stringify(data);
     } else {
       return window.alert("no image input set");

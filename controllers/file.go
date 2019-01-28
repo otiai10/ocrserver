@@ -60,14 +60,21 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 		client.SetWhitelist(whitelist)
 	}
 
-	text, err := client.Text()
+	var out string
+	switch r.FormValue("format") {
+	case "hocr":
+		out, err = client.HOCRText()
+		render.EscapeHTML = false
+	default:
+		out, err = client.Text()
+	}
 	if err != nil {
 		render.JSON(http.StatusBadRequest, err)
 		return
 	}
 
 	render.JSON(http.StatusOK, map[string]interface{}{
-		"result":  strings.Trim(text, r.FormValue("trim")),
+		"result":  strings.Trim(out, r.FormValue("trim")),
 		"version": version,
 	})
 }
