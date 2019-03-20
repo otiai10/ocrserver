@@ -1,0 +1,7 @@
+bou.ke/monkey v1.0.1/go.mod h1:FgHuK96Rv2Nlf+0u1OOVDpCMdsWyOFmeeketDHE7LIg=
+github.com/otiai10/gosseract v2.2.1+incompatible h1:Ry5ltVdpdp4LAa2bMjsSJH34XHVOV7XMi41HtzL8X2I=
+github.com/otiai10/gosseract v2.2.1+incompatible/go.mod h1:XrzWItCzCpFRZ35n3YtVTgq5bLAhFIkascoRo8G32QE=
+github.com/otiai10/marmoset v0.4.0 h1:Hg59lQI7qQowBEdsAJ/+VDTEospTBzXX/A1Gsw4mlvA=
+github.com/otiai10/marmoset v0.4.0/go.mod h1:t2q6dXWZ9YcFdRREDApX4bCmfQnL3isJ2dgl8ychlXg=
+github.com/otiai10/mint v1.2.1/go.mod h1:YnfyPNhBvnY8bW4SGQHCs/aAFhkgySlMZbrF5U0bOVw=
+golang.org/x/net v0.0.0-20190125091013-d26f9f9a57f3/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
