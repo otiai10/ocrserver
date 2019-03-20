@@ -1,7 +1,7 @@
 language: go
 go:
-  - 1.9
-  - tip
+  - 1.11.x
+  - 1.12.x
 compiler:
   - g++
 before_install:
@@ -12,4 +12,6 @@ env:
 install:
   - go get -t -v ./...
 script:
-  - go test ./... -cover
+  - go test -race -coverprofile=coverage.txt -covermode=atomic
+after_success:
+    - bash <(curl -s https://codecov.io/bash)

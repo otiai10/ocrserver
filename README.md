@@ -1,6 +1,7 @@
 # ocrserver
 
 [![Build Status](https://travis-ci.org/otiai10/ocrserver.svg?branch=master)](https://travis-ci.org/otiai10/ocrserver)
+[![codecov](https://codecov.io/gh/otiai10/ocrserver/branch/master/graph/badge.svg)](https://codecov.io/gh/otiai10/ocrserver)
 
 Simple OCR server, as a small working sample for [gosseract](https://github.com/otiai10/gosseract).
 
@@ -11,13 +12,17 @@ Try now here https://ocr-example.herokuapp.com/, and deploy your own now.
 # Deploy to Heroku
 
 ```sh
+# Get the code
 % git clone git@github.com:otiai10/ocrserver.git
 % cd ocrserver
-# heroku login (if needed)
+# Make your app
+% heroku login
 % heroku create
-# heroku container:login (If needed)
+# Deploy the container
+% heroku container:login
 % heroku container:push web
-# heroku open
+# Enjoy it!
+% heroku open
 ```
 
 cf. [heroku cli](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
@@ -28,7 +33,7 @@ cf. [heroku cli](https://devcenter.heroku.com/articles/heroku-cli#download-and-i
 ## Ready-Made Docker Image
 
 ```sh
-% docker run -e PORT=8080 -p 8080:8080 otiai10/ocrserver
+% docker run -p 8080:8080 otiai10/ocrserver
 # open http://localhost:8080
 ```
 
@@ -37,7 +42,7 @@ cf. [docker](https://www.docker.com/products/docker-toolbox)
 ## Development with Docker Image
 
 ```sh
-% docker-compose up --build
+% docker-compose up
 # open http://localhost:8080
 ```
 
@@ -54,14 +59,6 @@ If you have tesseract-ocr  and library files on your machine
 ```
 
 cf. [gosseract](https://github.com/otiai10/gosseract)
-
-## Dependencies
-
-This project is strongly encouraged to follow **the newest versions of dependencies**, however, if you want to freeze or use freezed versions of dependencies you can use `dep`.
-
-```
-% dep ensure
-```
 
 # Documents
 
