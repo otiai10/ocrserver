@@ -19,6 +19,8 @@ func testserver() *httptest.Server {
 	r := marmoset.NewRouter()
 	r.POST("/base64", Base64)
 	r.POST("/file", FileUpload)
+	r.GET("/status", Status)
+	r.GET("/", Index)
 	return httptest.NewServer(r)
 }
 
@@ -143,4 +145,18 @@ func TestFileUpload(t *testing.T) {
 		Expect(t, res.StatusCode).ToBe(http.StatusOK)
 	})
 
+}
+
+func TestStatus(t *testing.T) {
+	s := testserver()
+	res, err := http.Get(s.URL + "/status")
+	Expect(t, err).ToBe(nil)
+	Expect(t, res.StatusCode).ToBe(http.StatusOK)
+}
+
+func TestIndex(t *testing.T) {
+	s := testserver()
+	res, err := http.Get(s.URL + "/")
+	Expect(t, err).ToBe(nil)
+	Expect(t, res.StatusCode).ToBe(http.StatusOK)
 }
