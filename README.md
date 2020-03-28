@@ -47,6 +47,13 @@ cf. [docker](https://www.docker.com/products/docker-toolbox)
 # open http://localhost:8080
 ```
 
+You need more languages?
+
+```sh
+% docker-compose build --build-arg LOAD_LANG=rus
+% docker-compose up
+```
+
 cf. [docker-compose](https://www.docker.com/products/docker-toolbox)
 
 ## Manual Setup
