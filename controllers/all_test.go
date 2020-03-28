@@ -148,10 +148,24 @@ func TestFileUpload(t *testing.T) {
 }
 
 func TestStatus(t *testing.T) {
+
+	type Response struct {
+		Version   string `json:"version"`
+		Tesseract struct {
+			Version   string   `json:"version"`
+			Languages []string `json:"languages"`
+		} `json:"tesseract"`
+	}
+
 	s := testserver()
 	res, err := http.Get(s.URL + "/status")
 	Expect(t, err).ToBe(nil)
+	defer res.Body.Close()
 	Expect(t, res.StatusCode).ToBe(http.StatusOK)
+	resp := new(Response)
+	json.NewDecoder(res.Body).Decode(&resp)
+	Expect(t, resp.Version).ToBe("0.2.0")
+	Expect(t, resp.Tesseract.Languages).TypeOf("[]string")
 }
 
 func TestIndex(t *testing.T) {
