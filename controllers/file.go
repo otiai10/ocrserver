@@ -61,12 +61,13 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var out string
+	var confidence float64
 	switch r.FormValue("format") {
 	case "hocr":
 		out, err = client.HOCRText()
 		render.EscapeHTML = false
 	default:
-		out, err = client.Text()
+		out, confidence, err = scanText(client)
 	}
 	if err != nil {
 		render.JSON(http.StatusBadRequest, err)
@@ -74,7 +75,8 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	render.JSON(http.StatusOK, map[string]interface{}{
-		"result":  strings.Trim(out, r.FormValue("trim")),
-		"version": version,
+		"result":     strings.Trim(out, r.FormValue("trim")),
+		"confidence": confidence,
+		"version":    version,
 	})
 }

@@ -66,14 +66,15 @@ func Base64(w http.ResponseWriter, r *http.Request) {
 		client.SetWhitelist(body.Whitelist)
 	}
 
-	text, err := client.Text()
+	text, confidence, err := scanText(client)
 	if err != nil {
 		render.JSON(http.StatusInternalServerError, err)
 		return
 	}
 
 	render.JSON(http.StatusOK, map[string]interface{}{
-		"result":  strings.Trim(text, body.Trim),
-		"version": version,
+		"result":     strings.Trim(text, body.Trim),
+		"confidence": confidence,
+		"version":    version,
 	})
 }

@@ -56,12 +56,14 @@ func TestBase64(t *testing.T) {
 	defer res.Body.Close()
 
 	resp := new(struct {
-		Result  string `json:"result"`
-		Version string `json:"version"`
+		Result     string  `json:"result"`
+		Version    string  `json:"version"`
+		Confidence float64 `json:"confidence"`
 	})
 	err = json.NewDecoder(res.Body).Decode(resp)
 	Expect(t, err).ToBe(nil)
 	Expect(t, resp.Result).ToBe("ocrserver")
+	Expect(t, resp.Confidence).Not().ToBe(0.0)
 
 	When(t, "no request body provided", func(t *testing.T) {
 		res, err := http.Post(s.URL+"/base64", "application/json", nil)
@@ -90,6 +92,7 @@ func TestBase64(t *testing.T) {
 		body := new(RequestBodyForBase64)
 		body.Languages = "eng,jpn"
 		body.Whitelist = "012345ver"
+		body.Trim = "\n"
 		body.Base64 = string(raw)
 		b, _ := json.Marshal(body)
 		res, err := http.Post(s.URL+"/base64", "application/json", bytes.NewBuffer(b))
