@@ -1,25 +1,25 @@
-FROM golang:1.12
-ENV GO111MODULE=on
-
+FROM debian:bullseye-slim
 LABEL maintainer="otiai10 <otiai10@gmail.com>"
 
-RUN apt-get -qq update \
-  && apt-get install -y \
-    libleptonica-dev \
-    libtesseract-dev \
-    tesseract-ocr
+ARG LOAD_LANG=jpn
 
-# Load languages
-RUN apt-get install -y \
-  tesseract-ocr-jpn
+RUN apt update \
+    && apt install -y \
+      ca-certificates \
+      libtesseract-dev=4.1.1-2+b1 \
+      tesseract-ocr=4.1.1-2+b1 \
+      golang=2:1.15~1
+
+ENV GO111MODULE=on
+ENV GOPATH=${HOME}/go
+ENV PATH=${PATH}:${GOPATH}/bin
 
 ADD . $GOPATH/src/github.com/otiai10/ocrserver
 WORKDIR $GOPATH/src/github.com/otiai10/ocrserver
-RUN go get ./...
-RUN go test -v github.com/otiai10/gosseract
+RUN go get -v ./... && go install .
 
-ARG LOAD_LANG=
+# Load languages
 RUN if [ -n "${LOAD_LANG}" ]; then apt-get install -y tesseract-ocr-${LOAD_LANG}; fi
 
 ENV PORT=8080
-CMD $GOPATH/bin/ocrserver
+CMD ["ocrserver"]
