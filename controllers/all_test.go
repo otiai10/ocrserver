@@ -98,7 +98,7 @@ func TestBase64(t *testing.T) {
 		defer res.Body.Close()
 		resp := new(Response)
 		json.NewDecoder(res.Body).Decode(resp)
-		Expect(t, resp.Result).ToBe("00r5erver")
+		Expect(t, resp.Result).Not().ToBe("ocrserver")
 	})
 }
 
