@@ -3,7 +3,7 @@ name: Go CI
 on:
   workflow_dispatch:
   push:
-    branches: [master, main, develop]
+    branches: [main, develop]
 
 jobs:
   macos:

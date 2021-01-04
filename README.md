@@ -1,7 +1,7 @@
 # ocrserver
 
-[![Build Status](https://travis-ci.org/otiai10/ocrserver.svg?branch=master)](https://travis-ci.org/otiai10/ocrserver)
-[![codecov](https://codecov.io/gh/otiai10/ocrserver/branch/master/graph/badge.svg)](https://codecov.io/gh/otiai10/ocrserver)
+[![Go CI](https://github.com/otiai10/ocrserver/workflows/Go%20CI/badge.svg)](https://github.com/otiai10/ocrserver/actions?query=workflow%3A%22Go+CI%22)
+[![codecov](https://codecov.io/gh/otiai10/ocrserver/branch/main/graph/badge.svg)](https://codecov.io/gh/otiai10/ocrserver)
 [![Go Report Card](https://goreportcard.com/badge/github.com/otiai10/ocrserver)](https://goreportcard.com/report/github.com/otiai10/ocrserver)
 
 Simple OCR server, as a small working sample for [gosseract](https://github.com/otiai10/gosseract).
