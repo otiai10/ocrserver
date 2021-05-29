@@ -6,8 +6,8 @@ ARG LOAD_LANG=jpn
 RUN apt update \
     && apt install -y \
       ca-certificates \
-      libtesseract-dev=4.1.1-2+b1 \
-      tesseract-ocr=4.1.1-2+b1 \
+      libtesseract-dev=4.1.1-2.1 \
+      tesseract-ocr=4.1.1-2.1 \
       golang=2:1.15~1
 
 ENV GO111MODULE=on
