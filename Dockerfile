@@ -1,7 +1,5 @@
-FROM debian:bullseye-slim
+FROM debian:bullseye-slim AS build
 LABEL maintainer="otiai10 <otiai10@gmail.com>"
-
-ARG LOAD_LANG=jpn
 
 RUN apt update \
     && apt install -y \
@@ -11,6 +9,7 @@ RUN apt update \
       golang=2:1.15~1
 
 ENV GO111MODULE=on
+ENV GOPROXY="https://goproxy.cn,direct"
 ENV GOPATH=${HOME}/go
 ENV PATH=${PATH}:${GOPATH}/bin
 
@@ -19,7 +18,12 @@ WORKDIR $GOPATH/src/github.com/otiai10/ocrserver
 RUN go get -v ./... && go install .
 
 # Load languages
+ARG LOAD_LANG=chi-sim
 RUN if [ -n "${LOAD_LANG}" ]; then apt-get install -y tesseract-ocr-${LOAD_LANG}; fi
 
 ENV PORT=8080
-CMD ["ocrserver"]
+
+FROM scratch AS OS
+
+COPY --from=build /go/bin/ocrserver /
+CMD [ "/ocrserver" ]
